@@ -1,0 +1,24 @@
+
+.head ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    color: aliceblue;
+    padding: 5px;
+}
+.contact ul{
+    display: flex;
+    justify-content:center;
+    list-style: none;
+    color: aliceblue;
+    padding: 5px;
+}
+.contact-left ul{
+    list-style: none;
+    color: aliceblue;
+    text-align: center;
+}
+
+.contact ul li{
+    margin-left: 20px;
+}

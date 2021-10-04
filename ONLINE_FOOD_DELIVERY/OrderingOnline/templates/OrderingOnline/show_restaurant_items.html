@@ -1,0 +1,54 @@
+{% extends 'OrderingOnline\root_file.html' %}
+{% block content %}
+{% load static %}
+       <link rel="stylesheet" type="text/css" href="{% static 'OrderingOnline/register.css' %}" />
+<!-- restaurant name -->
+
+<!-- if alrady added in the cart -->
+{% if messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {% for x in messages %}
+       {{x}}
+    {% endfor %}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>  
+{% endif %}
+<div class="container" style="min-height: 300px;">
+
+  <div class="rest_name">
+    <center><h1>{{restaurant.Restaurant_name}}</h1></center>
+  </div>
+{% if items %}
+
+  <div class="restaurant-name">
+    <div class="row">
+      {% for x in items %}
+      <div class="col-md-3" style="margin-top: 10px;">
+                          
+          <div class="card" style="width: 15rem;">
+              <div>
+                  <img class="card-img item" src="/media/{{x.pimage}}"  alt="Card image cap">
+              </div>
+              <div>
+                <h5 class="ms-2">Name: {{x.pname}}</h5>
+                <p class="ms-2">Category: {{x.category}}</p>
+                <p class="ms-2">Price: {{x.price}}</p>
+                <div class="buttons_carts">
+                  <!-- {{rest_id}} -->
+                  <a href="{% url 'add_to_cart' rest_id=rest_id id=x.id page='show_restaurant_items'%}" class="btn btn-secondary cart ms-3 me-2  mb-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                  <a href="{% url 'show_dish' id=x.id rest_id=rest_id %}" class="btn btn-secondary show ms-3 me-3 mb-2">Show</a>
+                  <a href="{% url 'add_to_favourite' id=x.id page='show_restaurant_items' rest_id=rest_id %}" class="btn btn-secondary like  ms-2 me-2 mb-2"><i class="fas fa-heart"></i></a>
+                </div>
+              </div>
+            </div>
+      </div>
+
+      {% endfor %}
+     
+
+{% endif %}
+</div>
+</div>
+</div> 
+{% include 'OrderingOnline\footer.html' %}
+{% endblock %} 

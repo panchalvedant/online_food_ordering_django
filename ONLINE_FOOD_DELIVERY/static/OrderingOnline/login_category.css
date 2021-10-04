@@ -1,0 +1,37 @@
+
+.container{
+    background-color: peru;
+    position: relative;
+}
+.main1{
+    margin-top: 10px;
+    width:auto;
+    box-shadow: 5px 5px 20px #2c3e50;
+    background-color: #ecf0f1;
+    left:50%;
+    transform: translatex(-50%);
+    width:80vw;
+    position:absolute;
+   
+}
+.main{
+    /* margin:50px; */
+   
+    padding:3%;
+    background-color: #ecf0f1;
+    display: flex;
+    justify-content: center;
+}
+.select{
+    text-align: center;
+    min-height: 300px;
+    margin-right:20px;
+}
+img{
+    width:15vw;
+    height:40vh;
+}
+.Category{
+    margin-top:5px;
+    text-align: center;
+}

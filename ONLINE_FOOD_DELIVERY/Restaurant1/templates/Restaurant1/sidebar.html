@@ -1,0 +1,76 @@
+  <!-- "/media/"{{request.session.r_photo}} -->
+  <div class="container-fluid">
+    <div class="row navbar-left">
+     <div class="col-md-2 col-left "> <div class="vertical-nav " id="sidebar">
+      <div >
+        <div style="text-align: center;"><img src="/media/{{request.session.r_photo}}" alt="..." width="65" height="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
+          <div class="">
+            <h4 class="m-0">{{request.session.r_name}}</h4>
+            <p >{{request.session.r_email}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="status p-2">
+        <h3> Status: 
+          {% if status %}
+             Opened
+             {% else %}
+             close
+          {% endif %}
+            <form action="{% url 'status' %}" method="post" >
+           {% csrf_token %}
+           <input type="submit"  class="btn btn-info" value="status change">
+         </form></h3>
+     </div>
+
+      <ul class="nav flex-column mb-0">
+        <li class="nav-item">
+          <a href="{% url 'r_home' %}" class="nav-link  font-italic">
+            <i class="fas fa-home fa-th-large mr-3  fa-fw"></i>
+                  Home
+                </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'profile' %}" class="nav-link  font-italic">
+            <i class="fas fa-user-circle fa-th-large mr-3  fa-fw"></i>
+                   Profile
+                </a>
+        </li>
+      
+        <li class="nav-item">
+          <a href="{% url 'additems' %}" class="nav-link  font-italic">
+            <i class="fas fa-plus-square mr-3  fa-fw"></i>
+                   Add Items
+                </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'changingpassword' %}" class="nav-link  font-italic">
+            <i class="fa fa-key mr-3  fa-fw" aria-hidden="true"></i>
+                   Change Password
+                </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'manageitems' %}" class="nav-link  font-italic">
+            <i class="fas fa-tasks mr-3  fa-fw"></i>
+                   Manage Items
+                </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'delete_restaurant_account' %}" class="nav-link  font-italic">
+                <i class="fas fa-trash-alt mr-3 fa-fw"></i>
+                     Delete account
+                  </a>
+          </li>
+        
+        <li class="nav-item">
+          <a href="{% url 'logout_rest' %}" class="nav-link  font-italic">
+            <i class="fas fa-sign-out-alt mr-3  fa-fw"></i>
+                   Log Out
+                </a>
+        </li>
+        
+      </ul>
+ </div>
+ </div>
+    <!-- End vertical navbar -->

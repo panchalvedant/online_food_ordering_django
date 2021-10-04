@@ -1,0 +1,102 @@
+{% block content %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+{% load static %}
+       <link rel="stylesheet" type="text/css" href="{% static '/OrderingOnline/register.css' %}" />
+       {% if form.errors %}
+       <p class="error"> Invalid Username or Password </p>
+       {% endif %}
+       {% if error %}
+       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong> {{error}}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+       {% endif %}
+       {% if success %}
+       <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>  {{success}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>   
+       </div>
+       {% endif %}
+<div class="contanier">
+    <div class="formclass">
+        <form action="{% url 'restaurantsignup' %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+            <div class="register">
+                <h1>Restaurant Registration</h1>
+                <br>
+            </div>
+           
+            <div class="form-group ">
+                <label for="uname">Restaurant Name</label>
+                <input type="text" class="form-control" name="restname" id="restname" 
+                placeholder="Enter Restaurant name">
+              </div>
+              <div class="form-group ">
+                <label for="uname">Restaurant photo</label>
+                <input type="file" class="form-control" name="restphoto" id="restphoto" >
+              </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="uname">User Name</label>
+                <input type="text" class="form-control"
+                pattern="(?=.[a-z])(?=.*[A-Z]).{4,256}"  required title="4 to 256 characters and ateast uppercase letter" placeholder="Enter username name"
+                name="username" id="uname" placeholder="Enter Company name">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="cemail">Email</label>
+                <input type="email" class="form-control" name="email" id="cemail" placeholder="Enter email id">
+              </div>
+            </div>
+                <div class="form-group">
+                  <label for="mobileno">Mobileno</label>
+                  <input type="text" class="form-control" id="mobileno" name="mobileno" 
+                  pattern="^\d{10}$" title="please enter number properly"  placeholder="Enter Mobile No"
+                  placeholder="Enter Mobile No">
+                </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password"   pattern="(?=.*\d)(?=.*[@#$])(?=.*[a-z])(?=.*[A-Z]).{8,256}"
+                    title="Password must have atleast 8 characters including 1 uppercase letter, 1 lowercase letter and numeric characters"
+                    
+                    name="password" placeholder="Enter Password">
+                  </div>
+                <div class="form-group col-md-6">
+                  <label for="cpassword">Confirm Password</label>
+                  <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Enter confirm Password">
+                </div>
+              </div>
+            <div class="form-group">
+              <label for="inputAddress">Address</label>
+              <input type="text" class="form-control" id="inputAddress" name="address" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputCity">City</label>
+                <input type="text" class="form-control" id="inputCity" name="city" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputState">State</label>
+                <input type="text" class="form-control" id="inputState" name="state" required>
+              </div>
+            </div>
+            <div class="buttons">
+                <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+            </div>
+          </form>    
+          <div>
+            <a href="{% url 'index' %}" class="btn btn-dark btn-lg btn-block">Back</a>
+          </div>   
+    </div>  
+</div>
+
+ <!-- javascript link -->
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+{% endblock  %}

@@ -1,0 +1,43 @@
+<div class="col-md-2"> <div class="vertical-nav " id="sidebar">
+    <div >
+        <div style="text-align: center;" class="header">
+          <h4 class="m-0">{{request.session.d_name}}</h4>
+          <p >{{request.session.d_email}}</p>
+        </div>
+      </div>
+  
+    <ul class="nav flex-column mb-0">
+      <li class="nav-item">
+        <a href="{% url 'home' %}" class="nav-link  font-italic">
+          <i class="fas fa-home fa-th-large mr-3  fa-fw"></i>
+                Home
+              </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'd_profile' %}" class="nav-link  font-italic">
+          <i class="fas fa-user-circle fa-th-large mr-3  fa-fw"></i>
+                 Profile
+              </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'change_password' %}" class="nav-link  font-italic">
+          <i class="fa fa-key mr-3  fa-fw" aria-hidden="true"></i>
+                 Change Password
+              </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'delete_deliveryboy' %}" class="nav-link  font-italic">
+            <i class="fas fa-trash-alt mr-3 fa-fw"></i>
+                 Delete Account
+              </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'logout_deliveryboy' %}" class="nav-link  font-italic">
+          <i class="fas fa-sign-out-alt mr-3  fa-fw"></i>
+                 Log Out
+              </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>

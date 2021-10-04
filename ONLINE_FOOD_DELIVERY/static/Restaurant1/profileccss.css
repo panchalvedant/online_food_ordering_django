@@ -1,0 +1,25 @@
+*{
+   margin:0px;
+   padding: 0px;
+   box-sizing: border-box;
+}
+.formclass{
+    /* margin:50px; */
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    width:60%;
+    box-shadow: 1px 2px 10px #d1ccc0;
+    padding:3%;
+    background-color: bisque;
+    margin-top:10px;
+}
+.register{
+    text-align: center;
+}
+.profile_row{
+    margin:5px;
+}
+.col{
+   padding-right: 2px;
+}

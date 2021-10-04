@@ -1,0 +1,195 @@
+{% extends 'OrderingOnline\root_file.html' %}
+{% block content %}
+{% load static %}
+       <link rel="stylesheet" type="text/css" href="{% static 'OrderingOnline/register.css' %}" />
+  
+
+<div class="payment">
+
+  {% if success %}
+   <center>{{success}}</center> 
+  {% endif %}
+   
+  
+
+
+{% if detail %}
+<center>Account details is wrong</center>
+are you want to reset it?<a href="{% url 'reset_account' %}">Reset Account</a>  
+{% endif %}
+  
+{% if not_saved %}
+<div class="container">
+   <center> Your acount details is not saved,  please fill the form for payment</center>
+  
+      <form action="{% url 'saved_account' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="Account_no">Account_no</label>
+            <input type="text" class="form-control" name="account_no" id="Account_no" placeholder="Account_no" requried>
+        </div> 
+        <div class="form-group">
+            <center> <input type="submit" class="btn btn-primary checkout" value="save"></center>                     
+        </div> 
+      </form>
+</div>
+{% elif reset %}
+
+<div class="container">
+   <center> Reset</center>
+  
+      <form action="{% url 'reset_account' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="Account_no">Account_no</label>
+            <input type="text" class="form-control" name="account_no" id="Account_no" placeholder="Account_no" requried>
+        </div> 
+        <div class="form-group">
+            <center> <input type="submit" class="btn btn-primary checkout" value="Change"></center>                     
+        </div> 
+      </form>
+</div>
+
+
+{% elif otp %}
+
+
+
+<div class="container">
+                
+  <div class="pay">
+   
+      <form action="{% url 'final_payment' %}" method="POST">
+        {% csrf_token %}
+          <div class="form-group">
+              <label for="Account_no">Otp</label>
+              <input type="text" class="form-control" name="otp" id="otp" placeholder="otp" requried>
+          </div>  
+          <div class="form-group">
+              <center> <input type="submit" class="btn btn-primary checkout" value="Confirm"></center>                     
+          </div> 
+      </form>
+
+  </div>
+</div>
+
+{% else %}
+
+
+<div class="container">
+                
+
+{% if resend %}
+  <center>Have you forget the details? want to resend?<a href="{% url 'reset_account' %}">Reset Account</a>  </center>
+  <center>Please enter the details again</center>
+{% endif %}
+  
+
+{% if not_register %}
+  <center>{{not_register}}</center>
+  
+{% endif %}
+  
+  <div class="pay">
+      <form action="{% url 'payment' %}" method="POST">
+        {% csrf_token %}
+          <div class="form-group">
+              <label for="username">Username</label>
+              <input type="username" class="form-control" name="uname" id="username" required>
+          </div>
+          <div class="form-group">
+              <label for="Account_no">Account_no</label>
+              <input type="text" class="form-control" name="account_no" id="Account_no" placeholder="Account_no" requried>
+          </div>  
+          <div class="form-group">
+              <center> <input type="submit" class="btn btn-primary checkout" value="Check out"></center>                     
+          </div> 
+      </form>
+  </div>
+</div>
+
+
+
+{% endif %}
+  
+
+
+               
+  
+</div>
+
+{% include 'OrderingOnline\footer.html' %}
+
+{% endblock %} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %}
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>Buy cool new product</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body>
+    <section>
+      <div class="product">
+        <div class="description">
+          <h3>{{product}}</h3>
+          <h5>$20.00</h5>
+        </div>
+      </div>
+      <button type="button" id="checkout-button">Checkout</button>
+    </section>
+    {% csrf_token %}
+  </body>
+  <script type="text/javascript">
+    // Create an instance of the Stripe object with your publishable API key
+    const csrftoken =document.querySelector('[name=csrfmiddlewaretoken]').value;
+    var stripe = Stripe("{{STRIPE_PUBLIC_KEY}}");
+    var checkoutButton = document.getElementById("checkout-button");
+    checkoutButton.addEventListener("click", function () {
+      fetch("{% url 'checkout' %}", {
+        method: "POST",
+        headers:{
+            'X-token':csrftoken
+        }
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (session) {
+          return stripe.redirectToCheckout({ sessionId: session.id });
+        })
+        .then(function (result) {
+          // If redirectToCheckout fails due to a browser or network
+          // error, you should display the localized error message to your
+          // customer using error.message.
+          if (result.error) {
+            alert(result.error.message);
+          }
+        })
+        .catch(function (error) {
+          console.error("Error:", error);
+        });
+    });
+  </script>
+</html> -->
+{% endcomment %}

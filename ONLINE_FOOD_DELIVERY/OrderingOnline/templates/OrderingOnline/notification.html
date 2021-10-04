@@ -1,0 +1,59 @@
+{% extends 'OrderingOnline\root_file.html' %}
+{% block content %}
+{% load static %}
+       <link rel="stylesheet" type="text/css" href="{% static 'OrderingOnline/register.css' %}" />
+<div class="container" style="min-height: 400px;">
+   <div style="margin-top: 20px;">
+       <center>
+           <h3>YAY!! Your order is divered</h3>
+           <h5>Please feel the feedback form</h5>
+       </center>
+    </div>
+
+   <div style="width:400px; margin: auto; margin-top: 20px;"> 
+       
+       {% if notes %}
+
+           
+           {% for x in notes  %}
+              <div class="card p-2">
+                <h4>Order:</h4>
+                <form action="{% url 'feedback' id=x.id %}" style="margin:5px" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-3"><h6>{{x.notification.Item}}</h6></div>
+                        <div class="col-md-3">
+                            <select name="rate"  class="form-control" id="">
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="submit" value="submit" class="btn btn-info" name="submit">
+                        </div>
+                    </div>
+                   
+                   
+                </form>
+              </div>
+                
+           {% endfor %}
+               
+           
+       {% endif %}
+           
+
+   </div>
+
+
+
+</div>
+
+     
+
+{% include 'OrderingOnline\footer.html' %}
+
+{% endblock %} 

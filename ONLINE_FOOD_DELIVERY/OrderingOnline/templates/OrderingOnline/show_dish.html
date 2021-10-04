@@ -1,0 +1,44 @@
+{% extends 'OrderingOnline\root_file.html' %}
+{% block content %}
+{% load static %}
+       <link rel="stylesheet" type="text/css" href="{% static 'OrderingOnline/register.css' %}" />
+<div class="show_dish" style="min-height:400px;">
+
+       {% if messages %}
+       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+           {% for x in messages %}
+              {{x}}
+           {% endfor %}
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+       </div>  
+       {% endif %}
+      
+{% if Item_data %}
+<div class="container" >
+    <div class="card">
+        <div class="image_item">
+            <img  src="/media/{{Item_data.pimage}}"  alt="Card image cap">
+        </div>
+        <div>
+          <h5 class="ms-2 my-1">Name: {{Item_data.pname}}</h5>
+          <p class="ms-2 my-1">Category: {{Item_data.category}}</p>
+          <p class="ms-2 my-1 ">Discription: {{Item_data.pdesc}}</p>
+          <p class="ms-2 my-1">Price: {{Item_data.price}}</p>
+          <p class="ms-2 my-1">Discount: {{Item_data.discount}}</p>
+          <p class="ms-2 my-1">Feedback: {{Item_data.feedback}}</p>
+         
+         
+          <div class="buttons_carts">
+            <a href="{% url 'add_to_cart' rest_id=rest_id id=Item_data.id page='show_dish' %}" class="btn btn-secondary cart ms-3 me-2  mb-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+            <a href="{% url 'add_to_favourite' id=Item_data.id page='show_dish' rest_id=rest_id %}" class="btn btn-secondary like  ms-2 me-2 mb-2"><i class="fas fa-heart"></i></a>
+          </div>
+        </div>
+      </div>
+
+</div>
+
+</div>
+{% endif %}
+{% include 'OrderingOnline\footer.html' %}
+
+{% endblock %} 

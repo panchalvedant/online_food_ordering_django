@@ -1,0 +1,93 @@
+{% extends 'OrderingOnline\root_file.html' %}
+
+
+{% block content %}
+{% load static %}
+       <link rel="stylesheet" type="text/css" href="{% static 'OrderingOnline/register.css' %}" />
+
+<div class="container mt-3"  style="min-height:400px;">
+  {% if result %}
+    <div class="row">
+           {% for x in result %}
+
+        <div class="col-md-3">
+            <div class="card" style="width: 15rem;">
+                    <div>
+                        <img class="card-img item" src="/media/{{x.pimage}}"  alt="Card image cap">
+                    </div>
+                  <div>
+                      <h5 class="ms-2">Name: {{x.pname}}</h5>
+                      <p class="ms-2">Category: {{x.category}}</p>
+                      <p class="ms-2">Price: {{x.price}}</p>
+                      <div class="buttons_carts">
+                          <!-- {{rest_id}} -->
+                          <a href="{% url 'show_dish_by_search' id=x.id %}" class="btn btn-secondary show ms-3 me-3 mb-2">Show</a>                     
+                      </div>
+                  </div>
+              </div>
+         </div>
+           {% endfor %}
+
+           <div class="span">
+            <center>
+              {% if result.has_privious %}
+                <a href="?page={{result.privious_page_number}}"><i class="fas fa-angle-double-left fa-2x m-3"></i></a> 
+              {% endif %}
+                 
+              {% if result.has_next %}
+                 <a href="?page={{result.next_page_number}}"><i class="fas fa-angle-double-right fa-2x m-3"></i></a>  
+              {% endif %} 
+            </center>
+          </div>
+        </div>   
+  {% elif result2 %}
+    
+
+    <div class="row">  
+       {% for x in result2 %}
+            
+                  <div class="col-md-5">
+                    <div class="card mt-5 ms-5" style="max-width: 540px;">
+                      <div class="row g-0">
+                            <div class="col-md-4">
+                              <img src="/media/{{x.Restaurant_photo}}" class="w-100 h-100" alt="Available">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{x.Restaurant_name}}</h5>
+                                  <p class="card-text">{% if x.status is False %}Closed{% else %}Open{% endif %}<br>
+                                    <p class="card-text">{{x.address}}-{{x.city}}</p>
+                                    <a href="{% url 'show_restaurant' id=x.id %}" class="btn btn-secondary">Show</a>
+                                  <p class="card-text"><small class="text-muted">{{x.feedback}}</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                 
+    
+{% endfor %}
+        <div class="span">
+          <center>
+            {% if result2.has_privious %}
+                <a href="?page={{result2.privious_page_number}}"><i class="fas fa-angle-double-left fa-2x m-3"></i></a>
+            {% endif %}        
+            {% if result2.has_next %}
+              <a href="?page={{result2.next_page_number}}"><i class="fas fa-angle-double-right fa-2x m-3"></i></a>  
+            {% endif %} 
+          </center>
+        </div>
+
+{% else %}
+</div>
+<center>No result found</center>
+
+{% endif %}
+
+
+        
+</div>     
+</div>
+{% include 'OrderingOnline\footer.html' %}
+
+{% endblock %} 

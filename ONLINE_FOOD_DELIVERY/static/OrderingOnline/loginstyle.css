@@ -1,0 +1,20 @@
+.formclass{
+    /* margin:50px; */
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:40%;
+    box-shadow: 1px 2px 10px #d1ccc0;
+    padding:3%;
+    
+}
+.forgot{
+    color:blue;
+}
+.btn-success{
+    float: right;
+}
+.btn-dark{
+    float:right;
+}

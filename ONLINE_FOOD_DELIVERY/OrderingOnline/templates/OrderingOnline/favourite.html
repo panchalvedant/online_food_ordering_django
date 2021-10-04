@@ -1,0 +1,54 @@
+{% extends 'OrderingOnline\root_file.html' %}
+{% block content %}
+{% load static %}
+       <link rel="stylesheet" type="text/css" href="{% static 'OrderingOnline/register.css' %}" />
+<!-- restaurant name -->
+
+<!-- if alrady added in the cart -->
+<div class="container" style="min-height: 500px;">
+    {% if success %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{success}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+   {% endif %}
+  
+    <div class="row">
+        {% for x in favourite %}
+        <div class="col-sm-12 col-md-12 mt-2 ">
+          <div class="card" style="size:80%; height:240px;">
+            <div class="row">
+              <div class="col-md-5">
+                <a href="{% url 'show_favourite_dish' id=x.Items_data.id %}"><img src="/media/{{x.Items_data.pimage}}" style="height:230px;"alt="Available"></a>
+              </div>
+                    <div class="col-md-4">
+                        <div class="card-body">
+                        <h5 class="card-title">{{x.Items_data.pname}}</h5>
+                        <p class="card-text">Category:{{x.Items_data.category}}</p>
+                        <p class="card-text">Price: {{x.Items_data.price}}</p>
+                        <p class="card-text">discount: {{x.Items_data.discount}}</p>
+                            <p class="card-text">final amount: {{x.final_amount}}</p>
+                            <p class="card-text mt-2"><small class="text-muted">Feedback: {{x.Items_data.feedback}}</small></p>
+                        </div>
+                   </div>
+                    <div class="col-md-3">
+                            <div class="card-body">
+                            <a href="{% url 'show_favourite_dish' id=x.Items_data.id %}" class="btn btn-secondary show mt-2">Show</a>
+                            <a href="{% url 'delete_from_favourite' id=x.id %}" class="btn btn-danger mt-2 delete">Remove</a>      
+                            
+                            </div>
+                    </div>
+              </div>
+            </div>
+            </div>
+            {% endfor %}
+          </div>
+
+        </div>
+       
+    
+
+    
+
+{% include 'OrderingOnline\footer.html' %}
+{% endblock %} 

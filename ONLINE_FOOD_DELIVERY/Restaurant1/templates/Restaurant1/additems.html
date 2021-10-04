@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static '/Restaurant1/home.css' %}">
+
+
+  <title>Additems</title>
+  <style>
+    .col-md-10{
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+  {% include "restaurant1/sidebar.html" %}
+
+      <div class="col-md-10">
+        <h1>
+          {% if available %}
+          {{available}}
+          {% endif %}
+
+          {% if success %}
+              <div class="alert alret-green alert-dismissible fade show" role="alert">
+                {{success}}
+              </div>
+          {% endif %}
+          {% if error %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{error}}
+          </div>
+          {% endif %}
+        </h1>
+        <div class="formclass1">
+          <form action="{% url 'additems' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+                <div class="additems">
+                  <h1>Add Items</h1>
+                  <br>
+                </div>
+                <div class="form-group ">
+
+                  <h4>Hotel: {{request.session.r_name}}</h4>
+
+                </div>
+                  <div class="row">
+                      <div class="form-group col-md-6">
+                        <label for="foodname">Food</label>
+                        <input type="text" class="form-control" name="foodname" id="foodname">
+                      </div>
+                    <div class="form-group col-md-6">
+                        <label for="category">Category</label>
+                        <select name="category" class="form-control" id="category">
+                          {% if cat %}
+                          {% for x in cat %}
+                          <option value="{{x.cname}}">{{x.cname}}</option>
+                          {% endfor %}
+                          {% endif %}
+                        </select>
+                     </div>
+                 </div>
+                <div class="form-group">
+                  <label for="desc">Food Description</label>
+                  <textarea name="desc" class="form-control" id="desc" cols="8" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="price">Price</label>
+                  <input type="number" class="form-control" name="price" id="price">
+                </div>
+                <div class="form-group">
+                  <label for="foodphoto">Image</label>
+                  <input type="file" class="form-control" id="foodphoto" name="foodphoto">
+                </div>
+                  <button type="submit" class="btn btn-success btn-lg">Submit</button>
+                  <a href="{% url 'r_home' %}" class="btn btn-dark btn-lg ">Back</a>
+
+              </form>
+
+        </div>
+      </div>
+    </div>
+  
+    
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+   <!-- javascript link -->
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>

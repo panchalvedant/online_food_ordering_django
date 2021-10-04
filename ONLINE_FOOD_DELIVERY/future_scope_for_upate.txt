@@ -1,0 +1,11 @@
+1. User can also give for restaurant<----restaurant feedback---->
+2. User only add to cart if dish is same from resaturant which cart contains
+3. payment gateway(Real)
+4. maintain all waiting dishes automatically
+5. UI designs..
+6. If delivery boy get more than one orders and also othen has no  order even they haven't order beacause of deliveryboy 
+   who is available but got many times job is first available in database (delivery boy selecion update)
+7. contact us via mail system 
+8. Email verification after signup  
+9. filters
+10. offer codes uses at payment 

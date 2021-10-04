@@ -1,0 +1,23 @@
+.item{
+    width:15vw;
+    height:30vh;
+    margin:10px;
+}
+.card-img{
+    justify-content: center;
+}
+.card{
+    text-align: center;
+}
+.image-details-card{
+    margin:auto;
+}
+
+
+
+/* itemdetails.html css */
+.image-item-details{
+   color:aqua;
+   width:250px;
+   margin:10px;
+}

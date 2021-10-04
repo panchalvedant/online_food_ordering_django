@@ -1,0 +1,107 @@
+{% extends 'OrderingOnline\root_file.html' %}
+{% block content %}
+{% load static %}
+       <link rel="stylesheet" type="text/css" href="{% static 'OrderingOnline/register.css' %}" />
+  
+<div class="container" style="min-height: 400px;">
+
+
+
+{% if confirm %}
+
+<div class="alert alert-dark alert-dismissible fade show" role="alert">
+  <form action="{% url 'cancel' id=id %}" method="post">
+    {% csrf_token %}
+     Are You sure to cancel order {{delete_order.Item.pname }}<input type="submit" class="btn btn-outline-success ms-1" name="yes" value="Yes"></form>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  
+
+
+{% elif not_allowed %}
+
+<div class="alert alert-dark alert-dismissible fade show" role="alert">
+ {{not_allowed}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  
+{% endif %}
+  
+{% if canceled %}
+
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+ {{canceled}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  
+{% endif %}
+  
+{% if success %}
+    
+<div class="alert alert-success" role="alert">
+    <h3>Your Order will be reached soon...</h3>
+</div>
+
+{% endif %}
+  
+{% if order %}
+
+  <div class="row">
+    {% for x in order %}
+    
+   
+      
+    <div class="col-sm-12 col-md-12 mt-2 ">
+      <div class="card" style="size:80%; height:200px;">
+        <div class="row">
+          <div class="col-md-5">
+            <img src="/media/{{x.Item.pimage}}" style="height:200px;" alt="Available">
+          </div>
+          <div class="col-md-4">
+            <div class="card-body">
+              <h5 class="card-title">{{x.Item.pname}}</h5>
+              <p class="card-text">Category:{{x.Item.category}}</p>
+              <p class="card-text">Price: {{x.Item.price}}</p>
+                <p> quantity:{{x.quantity}}</p>
+                <p>Status:{{x.status}}</p>          
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card-body">
+               Delivery boy details:<hr>
+               {% if x.waiting_status%}
+                  Your order will be reached late due to lack of delivery boy: Please wait for some time
+                 {% else %}
+                 Name: {{x.delivery_boy.deliveryboy_name}}</br>
+                 Number:{{x.delivery_boy.mobile}}           
+               {% endif %}  
+               <div class="cancel-order mt-1">
+                <a href="{% url 'cancel' id=x.id %}" class="btn btn-danger">cancel</a>
+              </div>               
+            </div>
+            
+          </div>
+        </div>
+      </div> 
+    </div>
+   
+
+  
+   {% endfor %}
+  </div>
+
+    
+  {% endif %}
+      
+    
+</div>
+
+
+{% include 'OrderingOnline\footer.html' %}
+
+{% endblock %} 
+       
+       
+       
+
+

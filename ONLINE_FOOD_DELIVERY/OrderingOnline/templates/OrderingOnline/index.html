@@ -1,0 +1,102 @@
+{% extends 'OrderingOnline\root_file.html' %}
+{% block content %}
+{% load static %}
+       <link rel="stylesheet" type="text/css" href="{% static 'OrderingOnline/register.css' %}" />
+  
+
+<div class="index-heading">
+   {{delete}}
+      {% if sure %}
+      <div class="alert alert-light alert-dismissible fade show" role="alert">
+        <form action="{% url 'delete_customer' %}" method="post">
+          {% csrf_token %}
+          {{sure}} <input type="submit" class="btn btn-outline-success" name="yes" value="Yes"></form>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      
+      {% endif %}
+      <div class="text-body">
+        <h3>Eat And Enjoy</h3>
+        <h5>
+          No shopping,no cooking. no counting and no cleaning. Enjoy your healthy meals with your family.
+        </h5>
+      </div>
+
+</div>
+<div class="container main-class">
+
+  <div class="carousel-main">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="/media/food_images/home/second.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="/media/food_images/home/four.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="/media/food_images/home/five.jpg" class="d-block w-100" alt="...">
+        </div>
+      </div>
+     
+    </div>
+  </div>      
+
+
+</div>
+     
+<!-- restaurant name -->
+{% if rest %}
+  <div class="restaurant-name">
+    <div class="row">
+    {% for x in rest %}
+      {% for y in range %}
+      <div class="col-sm-12 col-md-6">
+        <div class="card mt-5 ms-5" style="max-width: 540px;">
+          <div class="row g-0">
+           
+              <div class="col-md-4">
+                <a href="{% url 'show_restaurant' id=x.id %}" >
+                <img src="/media/{{x.Restaurant_photo}}" style="width:150px; height:165px;" alt="Available">
+                 </a>
+              </div>
+            
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{x.Restaurant_name}}</h5>
+                <p class="card-text m-0">{% if x.status is False %}Closed{% else %}Open{% endif %}<br>
+                <p class="card-text m-0
+                ">{{x.address}}-{{x.city}}</p>
+                <a href="{% url 'show_restaurant' id=x.id %}" class="btn btn-secondary">Show</a>
+              </div>
+            </div>
+          </div>
+        </div> 
+       
+      </div>
+      {% endfor %}    
+     {% endfor %}
+    </div>
+  </div>
+  {% else %}
+   <center>No restaurant in your city available</center>
+{% endif %}
+
+<div class="span">
+<center>
+  <a href="?page={{rest.privious_page_number}}"><i class="fas fa-angle-double-left fa-2x m-3"></i></a>     
+  {% if rest.has_next %}
+     <a href="?page={{rest.next_page_number}}"><i class="fas fa-angle-double-right fa-2x m-3"></i></a>  
+  {% endif %} 
+</center>
+</div>
+
+
+
+{% include 'OrderingOnline\footer.html' %}
+{% endblock %} 

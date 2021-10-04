@@ -1,0 +1,127 @@
+{% extends 'OrderingOnline\root_file.html' %}
+{% block content %}
+{% load static %}
+       <link rel="stylesheet" type="text/css" href="{% static 'OrderingOnline/register.css' %}" />
+  
+   
+<!-- cart name -->
+<center><h1>My cart</h1></center>
+
+{% if cart_item_success %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>{{cart_item_success}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+{% if confirm %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <form action="{% url 'placeorder' %}" method="post">
+    {% csrf_token %}
+    {{confirm}} <input type="submit" class="btn btn-outline-success" name="yes" value="Yes"></form>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endif %}
+<div class="cart_page">
+
+{% if Can_not_order %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  Order can not be taken beacause restaurant is from different city
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endif %}
+
+
+{% if Closed %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  You can't order from closed restaurant
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endif %}
+
+{% if Occupid %}
+
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  Delivery Boy is Occupid,you might be have wait for order
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+
+{% endif %}
+  
+
+{% if cart %}
+
+
+<div class="container">
+
+  <div class="btn btn-primary">
+    Total : {{price}}
+  </div>
+  <a href="{% url 'placeorder' %}" class="btn btn-success mt-1">Purchase now</a>
+              
+  <div class="row">
+    {% for x in cart %}
+    <div class="col-sm-12 col-md-12 mt-2">
+      <div class="card" style="width:60%; height: fit-content;">
+        <div class="row">
+          <div class="col-md-5">
+            <img src="/media/{{x.Items_data.pimage}}" style="width:250px; height: 250px;" alt="Available">
+          </div>
+          <div class="col-md-6">
+            <div class="card-body p-1">
+             
+              <h5 class="card-title m-0">{{x.Items_data.pname}}</h5>
+              <p class="card-text m-0 ">Category:{{x.Items_data.category}}</p>
+              <p class="card-text m-0">Price: {{x.Items_data.price}}</p>
+               <p class="card-text m-0">discount: {{x.Items_data.discount}}</p>
+                <p class="card-text m-0">Delivery charge: {{x.delivery_charge}}</p>
+                <p class="card-text m-0">final amount: {{x.final_amount}}</p>
+               
+               <form action="{% url 'cart_increase' id=x.id %}" method="post">
+                  {% csrf_token %}
+                  <label> quantity:</label>
+                   <input type="number" name="quantity" id="quantity" value="{{x.quantity}}" style="width: 40px;">
+                   <input type="submit" name="increase"  value="+">
+               </form>
+                   
+                <p class="card-text mt-2"><small class="text-muted">Feedback: {{x.Items_data.feedback}}</small></p>
+
+           
+              
+            
+            </div>
+          </div>
+        <div class="col-md-1">
+              <p class="d-grid justify-content-md-end m-2"> <a href="{% url 'delete_item_from_cart' id=x.Items_data.id %}" class="btn btn-danger btn-block delete ms-auto"> <i class="fa fa-trash me-500"></i></a></p>        
+         
+        </div>
+        </div>
+      </div> 
+    </div>
+   
+
+  
+   {% endfor %}
+  </div>
+ 
+</div>
+
+{% else %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  Cart is empty!!
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+</div>
+
+     
+{% endif %}
+{% include 'OrderingOnline\footer.html' %}
+
+{% endblock %} 
